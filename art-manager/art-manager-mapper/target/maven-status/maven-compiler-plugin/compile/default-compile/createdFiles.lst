@@ -1,0 +1,4 @@
+com\art\mapper\MyTUserMapper.class
+com\art\mapper\TUserMapper.class
+com\art\mapper\TContentMapper.class
+com\art\mapper\TContentCategoryMapper.class

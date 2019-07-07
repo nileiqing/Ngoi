@@ -1,0 +1,12 @@
+{
+    "slidenavbar":[
+      	{
+    		"srcB":"images/banner.jpg",
+    		"alt":""
+ 		},
+ 		{
+    		"srcB":"images/banner1.jpg",
+    		"alt":""
+ 		}
+    ]
+}
