@@ -44,7 +44,7 @@ $(function (){
 	        var sponsors = "<strong>Sponsors:</strong>";
         	$.each(data,function(i,item){
         		sponsors+="<hr class=mainrighthr>";
-	            sponsors+="<a href="+item.url+"><img src="+item.pic+"></a>";
+	            sponsors+="<a href="+item.url+"><img src="+item.pic+"/></a>";
 	        });
 	        $(".sponsors").html(sponsors);
 	});

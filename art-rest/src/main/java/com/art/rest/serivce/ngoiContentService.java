@@ -4,12 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.art.pojo.TContent;
-import com.art.rest.pojo.DetailListNode;
-import com.art.rest.pojo.DetailListNodeResult;
-import com.art.rest.pojo.DetailListResult;
-import com.art.rest.pojo.FooterResult;
-import com.art.rest.pojo.IndexContentDisplayResult;
-import com.art.rest.pojo.SlideList;
+
 
 public interface ngoiContentService {
 	/***
@@ -30,5 +25,11 @@ public interface ngoiContentService {
 	 * @return
 	 */
 	List<TContent> getContentAllListByCategoryId(long CategoryId ,int odertype);
+	/***
+	 * 根据title中存储的数字 大小进行排序 来获取内容列表
+	 * @param CategoryId  分类id
+	 * @return
+	 */
+	List<TContent> getPublicationContentListByOrder(long CategoryId ,int odertype);
 	
 }

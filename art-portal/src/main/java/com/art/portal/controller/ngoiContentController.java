@@ -80,6 +80,13 @@ public ModelAndView showhomenewslist() {
 	return modelAndView;
 }
 //根据分类id按照顺序获取所有叶子节点的内容数据
+@RequestMapping(value="/getpublicationlist",produces=MediaType.APPLICATION_JSON_VALUE+";charset=utf-8") 
+@ResponseBody
+public String getPublicationContentListByOrder(String callback,Long categoryId,int ordertype) {
+	String list=ngoiContentService.getPublicationContentListByOrder(categoryId,ordertype);
+	return list;
+}
+//根据分类id按照顺序获取所有叶子节点的内容数据
 @RequestMapping(value="/getalllist",produces=MediaType.APPLICATION_JSON_VALUE+";charset=utf-8") 
 @ResponseBody
 public String getAllcontentListByOrder(String callback,Long categoryId,int ordertype) {

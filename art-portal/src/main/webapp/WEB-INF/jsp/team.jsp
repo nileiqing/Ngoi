@@ -23,7 +23,7 @@ pageEncoding="UTF-8"%>
 		* {
 			font-family: 'Open Sans'!important;
 		}
-		/* 带迁移到主体样式当中去 */
+		/* 单独设置教师的图片样式大小 */
 	</style>
 </head>
 <body>
@@ -44,7 +44,7 @@ pageEncoding="UTF-8"%>
 				<!-- <li><a href="#" target="_self">AI FOR WIRELESS</a></li> -->
 				<li><a href="<%=basePath%>research.html" target="_self">RESEARCH</a></li>
 				<li><a href="<%=basePath%>publications.html" target="_self">PUBLICATION</a></li>
-				<li><a href="<%=basePath%>events.html" target="_self">EVEVTS</a></li>
+				<li><a href="<%=basePath%>events.html" target="_self">EVENTS</a></li>
 				<li><a href="<%=basePath%>activities.html" target="_self">ACTIVITY</a></li>
 				<li><a href="<%=basePath%>openpositions.html" target="_self">OPENTION POSITION</a></li>
 				<li><a href="<%=basePath%>contact.html" target="_self">CONTACT</a></li>

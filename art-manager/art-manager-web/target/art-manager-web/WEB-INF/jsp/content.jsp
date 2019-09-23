@@ -51,6 +51,8 @@ var getpagemodel = function(categoryId){
 	if(hiddentype=="0"){//只显示标题和内容
 			if(categoryId=="8"||categoryId=="9"){
 				$("#J_title1").html("标题");
+			}else if(categoryId>=29&&categoryId<=33){
+				$("#J_title1").html("序号");
 			}else{
 				$("#J_title1").html("内容描述（不显示）");	
 			}
@@ -203,7 +205,7 @@ $(function(){
 				datagrid.datagrid('hideColumn', 'title');//显示对应的标题
 				datagrid.datagrid('hideColumn', 'subTitle');//显示副标题
 				
-			}else if(categoryId>=19&&categoryId<=28){
+			}else if((categoryId>=19&&categoryId<=28)||(categoryId>=29&&categoryId<=33)){
 			//此处为成员介绍，因为有模板所以只显示标题即可
 				datagrid.datagrid('hideColumn', 'titleDesc');//隐藏标题详述
 				datagrid.datagrid('hideColumn', 'pic');//显示第一个图片

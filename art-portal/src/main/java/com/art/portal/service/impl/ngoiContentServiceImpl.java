@@ -17,6 +17,8 @@ public class ngoiContentServiceImpl implements ngoiContentService {
 	private String ngoi_rest_content_url;
 	@Value("${ngoi_rest_allcontent_url}")
 	private String ngoi_rest_allcontent_url;
+	@Value("${ngoi_rest_publication_content_url}")
+	private String ngoi_rest_publication_content_url;
 	@Override
 	public String getContentListByOrder(Long categoryId,int ordertype) {
 		
@@ -38,6 +40,11 @@ public class ngoiContentServiceImpl implements ngoiContentService {
 	@Override
 	public String getAllContentListByOrder(Long categorytId, int ordertype) {
 		String result=HttpClientUtil.doGet(ngoi_rest_base_url+ngoi_rest_allcontent_url+"?categoryId="+categorytId+"&ordertype="+ordertype);
+		return result;
+	}
+	@Override
+	public String getPublicationContentListByOrder(Long categorytId, int ordertype) {
+		String result=HttpClientUtil.doGet(ngoi_rest_base_url+ngoi_rest_publication_content_url+"?categoryId="+categorytId+"&ordertype="+ordertype);
 		return result;
 	}
 	

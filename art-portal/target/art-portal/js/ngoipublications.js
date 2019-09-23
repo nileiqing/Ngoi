@@ -61,7 +61,7 @@ $(function (){
 		        $(".ulinks img").css({"margin-top":"15px","margin-bottom":"15px"});
 	});
 //获取出版物信息
-	$.getJSON(allurl + "getalllist.html?categoryId="+publicationcid+"&ordertype="+ordertype, 
+	$.getJSON(allurl + "getpublicationlist.html?categoryId="+publicationcid+"&ordertype="+ordertype, 
 				function(data) {
 					var finalHtml="";
 					var booklistr="";//书

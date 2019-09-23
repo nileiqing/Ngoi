@@ -1,6 +1,8 @@
 package com.art.rest.service.impl;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,22 +17,7 @@ import com.art.pojo.TContentCategory;
 import com.art.pojo.TContentCategoryExample;
 import com.art.pojo.TContentExample;
 import com.art.pojo.TContentExample.Criteria;
-import com.art.rest.pojo.ContentCatResult;
-import com.art.rest.pojo.DetailListNode;
-import com.art.rest.pojo.DetailListNodeResult;
-import com.art.rest.pojo.DetailListResult;
-import com.art.rest.pojo.FootCenterNode;
-import com.art.rest.pojo.FooterResult;
-import com.art.rest.pojo.FooterRightNode;
-import com.art.rest.pojo.Footerleft;
-import com.art.rest.pojo.IndexContentDisplayResult;
-import com.art.rest.pojo.SlideImgNode;
-import com.art.rest.pojo.SlideList;
-import com.art.rest.serivce.ContentCategoryService;
-import com.art.rest.serivce.ContentService;
 import com.art.rest.serivce.ngoiContentService;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 
 @Service
 public class ngoiContentServiceImpl implements ngoiContentService{
@@ -129,5 +116,49 @@ public class ngoiContentServiceImpl implements ngoiContentService{
 				CateGoryDFS(tContentCategories);
 			}
 		}
+	}
+	/***
+	 * 根据title中存储的数字 大小进行排序 来获取内容列表
+	 * @param CategoryId  分类id
+	 * @return
+	 */
+	@Override
+	public List<TContent> getPublicationContentListByOrder(long CategoryId, int odertype) {
+		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub
+				TContentCategoryExample tContentCategoryExample=new TContentCategoryExample();
+				TContentCategoryExample.Criteria tContentCategorycriteria=tContentCategoryExample.createCriteria();
+				tContentCategorycriteria.andParentIdEqualTo(CategoryId);
+				List<TContentCategory> tContentCategories=tContentCategoryMapper.selectByExample(tContentCategoryExample);
+				if (tContentCategories!=null&&tContentCategories.size()>0) {
+					
+					CateGoryDFS(tContentCategories);
+				}
+				List<TContent> contentlist=new ArrayList<TContent>();
+				for(int i=0;i<CategoryIdlist.size();i++) {
+					TContentExample example=new TContentExample();
+					TContentExample.Criteria criteria=example.createCriteria();
+					criteria.andCategoryIdEqualTo(CategoryIdlist.get(i));
+					if(odertype==1) {
+						example.setOrderByClause("created desc");
+					}
+					List<TContent> list=tContentMapper.selectByExampleWithBLOBs(example);
+					for (int j = 0; j < list.size(); j++) {
+							contentlist.add(list.get(j));
+						}
+
+					
+				}
+				CategoryIdlist.clear();
+				Collections.sort(contentlist,new Comparator<TContent>() {
+
+					@Override
+					public int compare(TContent o1, TContent o2) {
+						// TODO Auto-generated method stub
+						
+						return  Integer.parseInt(o1.getTitle())-Integer.parseInt(o2.getTitle());
+					}
+				});
+				return contentlist;
 	}
 }

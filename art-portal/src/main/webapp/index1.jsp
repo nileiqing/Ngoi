@@ -39,7 +39,7 @@ pageEncoding="UTF-8"%>
 				<!-- <li><a href="#" target="_self">AI FOR WIRELESS</a></li> -->
 				<li><a href="<%=basePath%>research.html" target="_self">RESEARCH</a></li>
 				<li><a href="<%=basePath%>publications.html" target="_self">PUBLICATION</a></li>
-				<li><a href="<%=basePath%>events.html" target="_self">EVEVTS</a></li>
+				<li><a href="<%=basePath%>events.html" target="_self">EVENTS</a></li>
 				<li><a href="<%=basePath%>activities.html" target="_self">ACTIVITY</a></li>
 				<li><a href="<%=basePath%>openpositions.html" target="_self">OPENTION POSITION</a></li>
 				<li><a href="<%=basePath%>contact.html" target="_self">CONTACT</a></li>

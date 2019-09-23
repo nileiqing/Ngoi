@@ -229,11 +229,11 @@ KindEditor.lang({
 	'template.selectTemplate' : '可选模板',
 	'template.replaceContent' : '替换当前内容',
 	'template.fileList' : {
-		'1.html' : '首页新闻',
-		'4.html' : '成员介绍',
-		'5.html' : '研究项目',
+		'1.html' : '首页新闻模板',
+		'4.html' : '成员介绍模板',
+		'5.html' : '研究项目模板',
 		'6.html' : 'Event描述',
-		'7.html' : 'Event轮播图',
+		'7.html' : '轮播图模板',
 		'2.html' : '表格',
 		'3.html' : '项目编号'
 	}

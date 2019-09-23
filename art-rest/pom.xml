@@ -69,7 +69,7 @@
 					<uriEncoding>UTF-8</uriEncoding>
 					<path>/</path>
 					<url>http://203.189.232.251:8081/manager/text</url>
-					<!-- <url>http://192.168.204.128:8081/manager/text</url> -->
+					 <!-- <url>http://192.168.204.128:8081/manager/text</url> -->
 					<username>tomcat</username>
 					<password>tomcatngoi</password>
 				</configuration>		

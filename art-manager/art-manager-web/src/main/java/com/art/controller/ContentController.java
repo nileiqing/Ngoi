@@ -57,7 +57,7 @@ public class ContentController {
 	}
 	/**
      * 尼雷清
-     * 更新对应的内容
+     * 删除对应的内容  
      * @param content
      * @return
      */
@@ -65,7 +65,7 @@ public class ContentController {
 	
 	@ResponseBody
 	public ArtResult deleteContentList( @RequestParam("ids") List<Long> ids)throws Exception{
-		ArtResult result=contentService.deleteConent(ids);
+		ArtResult result = contentService.deleteConent(ids);
 		return result;
 	}
 }

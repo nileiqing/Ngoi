@@ -1,5 +1,7 @@
 package com.art.service.impl;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -35,7 +37,10 @@ public class ContentServiceImpl implements ContentService{
 /*		content.setContent(AddEscapecharacter(content.getContent()));
 		content.setTitle(AddEscapecharacter(content.getTitle()));
 		content.setTitleDesc(AddEscapecharacter(content.getTitleDesc()));*/
+		
 		TContentMapper.insert(content);
+		//若更新的是publication板块的内容，则对title字段重新进行排序和更新
+		RefershPublicationOrder(content.getCategoryId());
 		return ArtResult.ok();
 	}
 	/**
@@ -51,8 +56,22 @@ public class ContentServiceImpl implements ContentService{
 		TContentExample tContentExample=new TContentExample();
 		Criteria  criteria=tContentExample.createCriteria();
 		criteria.andCategoryIdEqualTo(categoryId);
+		//若是publication模块则按照title 序号升序排序
+		/*
+		 * if(categoryId>=29&&categoryId<=33) {
+		 * tContentExample.setOrderByClause("title"); }
+		 */
 		PageHelper.startPage(page, rows);
 		List<TContent> contentList=TContentMapper.selectByExampleWithBLOBs(tContentExample);
+		if(categoryId>=29&&categoryId<=33) {
+			Collections.sort(contentList, new Comparator<TContent>() {
+				@Override
+				public int compare(TContent o1, TContent o2) {
+					// TODO Auto-generated method stub
+					return Integer.parseInt(o1.getTitle())-Integer.parseInt(o2.getTitle());
+				}
+			});
+		}
 		//创建一个返回值对象
 		EUDataGridResult result=new EUDataGridResult();
 		result.setRows(contentList);
@@ -75,6 +94,8 @@ public class ContentServiceImpl implements ContentService{
 		content.setCreated(content2.getCreated());
 		content.setUpdated(new Date());
 		TContentMapper.updateByPrimaryKeyWithBLOBs(content);
+		//若更新的是publication板块的内容，则对title字段重新进行排序和更新
+		RefershPublicationOrder(content.getCategoryId());
 		return ArtResult.ok();
 	}
 	/**
@@ -90,6 +111,32 @@ public class ContentServiceImpl implements ContentService{
 			TContentMapper.deleteByPrimaryKey(ids.get(i));
 		}
 		return ArtResult.ok();
+	}
+	/**
+     * 尼雷清
+     * 如果是操作的publication板块的内容 ，则对title的序号进行重新排序和更新（插入、更新时候进行操作）
+     * @param categoryId
+     * @return
+     */
+	public void RefershPublicationOrder(long categoryId){
+		if(categoryId>=29&&categoryId<=33) {
+			TContentExample tContentExample=new TContentExample();
+			Criteria  criteria=tContentExample.createCriteria();
+			criteria.andCategoryIdEqualTo(categoryId);
+			List<TContent> contentList=TContentMapper.selectByExampleWithBLOBs(tContentExample);
+			Collections.sort(contentList, new Comparator<TContent>() {
+					@Override
+					public int compare(TContent o1, TContent o2) {
+						// TODO Auto-generated method stub
+						return Integer.parseInt(o1.getTitle())-Integer.parseInt(o2.getTitle());
+					}
+			});
+			for(int i = 0 ; i<contentList.size();i++) {
+				contentList.get(i).setTitle(String.valueOf(i+1));
+				TContentMapper.updateByPrimaryKeyWithBLOBs(contentList.get(i));
+			}
+		}
+		
 	}
 	/**
      * 尼雷清

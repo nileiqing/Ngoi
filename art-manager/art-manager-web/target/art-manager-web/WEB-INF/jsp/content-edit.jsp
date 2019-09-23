@@ -89,6 +89,8 @@ var contentEditPage = {
 					
 					hiddentype=4;//显示一个URL和显示一个图片
 				
+				}else if(categoryId>=29&&categoryId<=33){//出版物版面
+					hiddentype=5;
 				}
 				if(hiddentype=="0"){//标题和内容
 					if(document.getElementById("title").value==""){
@@ -121,6 +123,14 @@ var contentEditPage = {
 				
 					if(document.getElementById("url").value==""||document.getElementById("pic").value==""){
 						$.messager.alert('提示','表单还未填写完成!');
+						return ;
+					}
+				}else if(hiddentype==5){//出版物版面 控制title为数字
+
+					var reg=new RegExp(/^[0-9]+$/);
+					
+					if(reg.test(document.getElementById("title").value)==false){
+						$.messager.alert('提示',"序号应该为数字！");
 						return ;
 					}
 				}
