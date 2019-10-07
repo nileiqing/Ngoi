@@ -8,8 +8,12 @@
 	    <table cellpadding="5">
 	        <tr >
 	            <td id="J_title1">内容标题:</td>
-	            <td id="J_title2"><input class="easyui-textbox" type="text" id="title"  name="title" data-options="required:true" style="width: 280px;"></input></td>
+	            <td id="J_title2"><input class="easyui-textbox" type="text" id="title"  name="title" data-options="required:true" style="width: 280px;"/></td>
 	        </tr>
+			<tr >
+				<td id="J_index1">序号:</td>
+				<td id="J_index2"><input class="easyui-textbox" type="text" id="cIndex"  name="cIndex" data-options="required:true" style="width: 280px;"/></td>
+			</tr>
 			<!-- 	        <tr >
 			    <td id="J_specialy" >学院特色:</td>
 			    <td id="J_titleDesc1y">
@@ -21,16 +25,16 @@
 			</tr> -->
 	        <tr>
 	            <td id="J_subTitle1">内容子标题:</td>
-	            <td id="J_subTitle2"><input class="easyui-textbox" type="text" id="subTitle" name="subTitle" style="width: 280px;"></input></td>
+	            <td id="J_subTitle2"><input class="easyui-textbox" type="text" id="subTitle" name="subTitle" style="width: 280px;"/></td>
 	        </tr>
 	        <tr>
 	            <td id="J_titleDesc1">内容描述:</td>
-	            <td id="J_titleDesc2"><input class="easyui-textbox" name="titleDesc" id="titleDesc" data-options="multiline:true,validType:'length[0,300]'" style="height:60px;width: 280px;"></input>
+	            <td id="J_titleDesc2"><input class="easyui-textbox" name="titleDesc" id="titleDesc" data-options="multiline:true,validType:'length[0,300]'" style="height:60px;width: 280px;"/>
 	            </td>
 	        </tr>
 	         <tr>
 	            <td id="J_url1">URL:</td>
-	            <td id="J_url2"><input class="easyui-textbox" type="text" id="url" name="url" style="width: 280px;" value="http://"></input></td>
+	            <td id="J_url2"><input class="easyui-textbox" type="text" id="url" name="url" style="width: 280px;" value="http://"/></td>
 	        </tr>
 	        <tr>
 	            <td id="J_pic">图片:</td>
@@ -127,7 +131,7 @@
 
 					var reg=new RegExp(/^[0-9]+$/);
 					
-					if(reg.test(document.getElementById("title").value)==false){
+					if(reg.test(document.getElementById("cIndex").value)==false){
 						$.messager.alert('提示',"序号应该为数字！");
 						return ;
 					}

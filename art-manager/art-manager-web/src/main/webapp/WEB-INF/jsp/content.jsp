@@ -10,6 +10,7 @@
 		    <thead>
 		        <tr>
 		            <th data-options="field:'id',width:30">ID</th>
+					<th data-options="field:'cIndex',width:30">序号</th>
 		            <th data-options="field:'title',width:120">内容标题</th>
 		            <th data-options="field:'subTitle',width:100">内容子标题</th>
 		            <th data-options="field:'titleDesc',width:120">内容描述</th>
@@ -28,7 +29,7 @@
 //去的显示页面的样式，并进行渲染
 var getpagemodel = function(categoryId){
 	var hiddentype;
-	if(categoryId=="11"||categoryId=="12"||(categoryId>=19&&categoryId<=28)||(categoryId>=29&&categoryId<=33)||categoryId=="34"||categoryId=="35"||categoryId=="8"||categoryId=="9"){//此处是只有一个内容的情况（其中的内容标题是用来对此词条做描述用的） Lab introduction 实验室介绍+Research 也做成员介绍处的显示 34、35为Event模块 8为Activities模块 9为Open Position模块
+	if(categoryId=="11"||categoryId=="12"||(categoryId>=19&&categoryId<=28)||categoryId=="34"||categoryId=="35"||categoryId=="8"||categoryId=="9"){//此处是只有一个内容的情况（其中的内容标题是用来对此词条做描述用的） Lab introduction 实验室介绍+Research 也做成员介绍处的显示 34、35为Event模块 8为Activities模块 9为Open Position模块
 			
 		hiddentype=0;//标题 内容
 				
@@ -47,12 +48,12 @@ var getpagemodel = function(categoryId){
 		hiddentype=5;
 	}else if(categoryId=="10"){
 		hiddentype=6;
+	}else if(categoryId>=29&&categoryId<=33){//显示序号和内容
+		hiddentype=7;
 	}
 	if(hiddentype=="0"){//只显示标题和内容
 			if(categoryId=="8"||categoryId=="9"){
 				$("#J_title1").html("标题");
-			}else if(categoryId>=29&&categoryId<=33){
-				$("#J_title1").html("序号");
 			}else{
 				$("#J_title1").html("内容描述（不显示）");	
 			}
@@ -66,6 +67,8 @@ var getpagemodel = function(categoryId){
 			 document.getElementById("J_url2").style.display="none";
 			 document.getElementById("J_pic1").style.display="none";
 			 document.getElementById("J_pic2").style.display="none";
+			 document.getElementById("J_index1").style.display="none";
+			 document.getElementById("J_index2").style.display="none";
 		}else if(hiddentype=="1"){//news的图片 日期 简介
 			$("#J_title1").html("标题");
 			$("#J_subTitle1").html("日期");
@@ -74,8 +77,10 @@ var getpagemodel = function(categoryId){
 			 document.getElementById("J_url2").style.display="none";
 			 document.getElementById("J_pic1").style.display="none";
 			 document.getElementById("J_pic2").style.display="none";
+			 document.getElementById("J_index1").style.display="none";
+			 document.getElementById("J_index2").style.display="none";
 		}else if(hiddentype=="2"){//单单两个图片
-			document.getElementById("J_title1").style.display="none";
+			 document.getElementById("J_title1").style.display="none";
 			 document.getElementById("J_title2").style.display="none";
 			 document.getElementById("J_titleDesc1").style.display="none";
 			 document.getElementById("J_titleDesc2").style.display="none";
@@ -85,6 +90,8 @@ var getpagemodel = function(categoryId){
 			 document.getElementById("J_url2").style.display="none";
 			 document.getElementById("J_content1").style.display="none";
 			 document.getElementById("J_content2").style.display="none";
+			 document.getElementById("J_index1").style.display="none";
+			 document.getElementById("J_index2").style.display="none";
 		}else if(hiddentype=="3"){// 只显示一个图片 （首页ｌｏｇｏ用）
 			document.getElementById("J_title1").style.display="none";
 			 document.getElementById("J_title2").style.display="none";
@@ -98,6 +105,8 @@ var getpagemodel = function(categoryId){
 			 document.getElementById("J_pic2").style.display="none";
 			 document.getElementById("J_content1").style.display="none";
 			 document.getElementById("J_content2").style.display="none";
+			 document.getElementById("J_index1").style.display="none";
+			 document.getElementById("J_index2").style.display="none";
 		}else if(hiddentype=="4"){//显示一个URL和显示一个图片（sponsors 和 links使用）
 			document.getElementById("J_title1").style.display="none";
 			 document.getElementById("J_title2").style.display="none";
@@ -109,6 +118,8 @@ var getpagemodel = function(categoryId){
 			 document.getElementById("J_pic2").style.display="none";
 			 document.getElementById("J_content1").style.display="none";
 			 document.getElementById("J_content2").style.display="none";
+			 document.getElementById("J_index1").style.display="none";
+			 document.getElementById("J_index2").style.display="none";
 		}else if(hiddentype=="5"){//标题 URL　内容　　　研究项目
 			 $("#J_title1").html("标题");
 			 document.getElementById("J_pic").style.display="none";
@@ -124,6 +135,21 @@ var getpagemodel = function(categoryId){
 			 document.getElementById("photo").style.display="none";
 			 document.getElementById("J_title1").style.display="none";
 			 document.getElementById("J_title2").style.display="none";
+			 document.getElementById("J_titleDesc1").style.display="none";
+			 document.getElementById("J_titleDesc2").style.display="none";
+			 document.getElementById("J_subTitle1").style.display="none";
+			 document.getElementById("J_subTitle2").style.display="none";
+			 document.getElementById("J_url1").style.display="none";
+			 document.getElementById("J_url2").style.display="none";
+			 document.getElementById("J_pic1").style.display="none";
+			 document.getElementById("J_pic2").style.display="none";
+			 document.getElementById("J_index1").style.display="none";
+			 document.getElementById("J_index2").style.display="none";
+		}else if(hiddentype=="7"){//显示序号和内容 Publication
+			 document.getElementById("J_title1").style.display="none";
+			 document.getElementById("J_title2").style.display="none";
+			 document.getElementById("J_pic").style.display="none";
+			 document.getElementById("photo").style.display="none";
 			 document.getElementById("J_titleDesc1").style.display="none";
 			 document.getElementById("J_titleDesc2").style.display="none";
 			 document.getElementById("J_subTitle1").style.display="none";
@@ -167,7 +193,7 @@ $(function(){
 				*/
 			var categoryId=node.id;
 			var hiddentype;
-			if(categoryId=="11"||categoryId=="12"||categoryId=="5"||categoryId=="6"||categoryId=="7"||categoryId=="8"||categoryId=="9"||categoryId=="34"||categoryId=="35"){//此处是只有一个内容的情况（其中的内容标题是用来对此词条做描述用的） Lab introduction 实验室介绍+Research thrusts研究课题  Publication Events Activities都用到
+			if(categoryId=="11"||categoryId=="12"||categoryId=="6"||categoryId=="7"||categoryId=="8"||categoryId=="9"||categoryId=="34"||categoryId=="35"){//此处是只有一个内容的情况（其中的内容标题是用来对此词条做描述用的） Lab introduction 实验室介绍+Research thrusts研究课题  Publication Events Activities都用到
 				var option1=datagrid.datagrid('getColumnOption', 'title');
 				if(categoryId=="11"){//显示的内容栏里边的标题名字进行更改
 					option1.title = "Lab introction";
@@ -179,6 +205,7 @@ $(function(){
 					option1.title = "内容描述";
 				}
 				datagrid.datagrid();
+				datagrid.datagrid('hideColumn', 'cIndex');//隐藏序号
 				datagrid.datagrid('hideColumn', 'titleDesc');//隐藏标题详述
 				datagrid.datagrid('hideColumn', 'pic');//隐藏第一个图片
 				datagrid.datagrid('hideColumn', 'pic2');//隐藏对第二个图片
@@ -191,6 +218,7 @@ $(function(){
 				option2.title = "Datatime";
 				option3.title = "Pic";
 				datagrid.datagrid();
+				datagrid.datagrid('hideColumn', 'cIndex');//隐藏序号
 				datagrid.datagrid('showColumn', 'titleDesc');//隐藏标题详述
 				datagrid.datagrid('showColumn', 'pic');//显示第一个图片
 				datagrid.datagrid('hideColumn', 'pic2');//隐藏对第二个图片
@@ -199,25 +227,42 @@ $(function(){
 				
 			}else if(categoryId=="14"||categoryId=="15"||categoryId=="16"||categoryId=="17"){//只有一个图片（但是编辑中有URL）
 				datagrid.datagrid();
+				datagrid.datagrid('hideColumn', 'cIndex');//隐藏序号
 				datagrid.datagrid('hideColumn', 'titleDesc');//隐藏标题详述
 				datagrid.datagrid('showColumn', 'pic');//显示第一个图片
 				datagrid.datagrid('hideColumn', 'pic2');//隐藏对第二个图片
 				datagrid.datagrid('hideColumn', 'title');//显示对应的标题
 				datagrid.datagrid('hideColumn', 'subTitle');//显示副标题
 				
-			}else if((categoryId>=19&&categoryId<=28)||(categoryId>=29&&categoryId<=33)){
+			}else if(categoryId>=19&&categoryId<=28){
 			//此处为成员介绍，因为有模板所以只显示标题即可
+				datagrid.datagrid('hideColumn', 'cIndex');//隐藏序号
 				datagrid.datagrid('hideColumn', 'titleDesc');//隐藏标题详述
-				datagrid.datagrid('hideColumn', 'pic');//显示第一个图片
+				datagrid.datagrid('hideColumn', 'pic');//隐藏第一个图片
 				datagrid.datagrid('hideColumn', 'pic2');//隐藏对第二个图片
 				datagrid.datagrid('showColumn', 'title');//显示对应的标题
-				datagrid.datagrid('hideColumn', 'subTitle');//显示副标题
-			}else if(categoryId=="10"){
+				datagrid.datagrid('hideColumn', 'subTitle');//隐藏副标题
+			}else if(categoryId=="10"){//contact内容
+				datagrid.datagrid('hideColumn', 'cIndex');//隐藏序号
 				datagrid.datagrid('hideColumn', 'titleDesc');//隐藏标题详述
-				datagrid.datagrid('hideColumn', 'pic');//显示第一个图片
+				datagrid.datagrid('hideColumn', 'pic');//隐藏第一个图片
+				datagrid.datagrid('hideColumn', 'pic2');//隐藏对第二个图片
+				datagrid.datagrid('hideColumn', 'title');//隐藏对应的标题
+				datagrid.datagrid('hideColumn', 'subTitle');//隐藏副标题
+			}else if(categoryId>=29&&categoryId<=33){//出版物方面带序号的
+				datagrid.datagrid('showColumn', 'cIndex');//显示序号
+				datagrid.datagrid('hideColumn', 'titleDesc');//隐藏标题详述
+				datagrid.datagrid('hideColumn', 'pic');//隐藏第一个图片
 				datagrid.datagrid('hideColumn', 'pic2');//隐藏对第二个图片
 				datagrid.datagrid('hideColumn', 'title');//显示对应的标题
-				datagrid.datagrid('hideColumn', 'subTitle');//显示副标题
+				datagrid.datagrid('hideColumn', 'subTitle');//隐藏副标题
+			}else if(categoryId=="5"){//Research板块 只显示 标题、序号
+				datagrid.datagrid('showColumn', 'cIndex');//显示序号
+				datagrid.datagrid('hideColumn', 'titleDesc');//隐藏标题详述
+				datagrid.datagrid('hideColumn', 'pic');//隐藏第一个图片
+				datagrid.datagrid('hideColumn', 'pic2');//隐藏对第二个图片
+				datagrid.datagrid('showColumn', 'title');//显示对应的标题
+				datagrid.datagrid('hideColumn', 'subTitle');//隐藏副标题
 			}
 			
 				

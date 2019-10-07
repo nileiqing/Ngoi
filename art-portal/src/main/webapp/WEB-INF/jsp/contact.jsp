@@ -65,8 +65,8 @@ pageEncoding="UTF-8"%>
 				<!-- <li><a href="#" target="_self">AI FOR WIRELESS</a></li> -->
 				<li><a href="<%=basePath%>research.html" target="_self">RESEARCH</a></li>
 				<li><a href="<%=basePath%>publications.html" target="_self">PUBLICATION</a></li>
-				<li><a href="<%=basePath%>events.html" target="_self">EVENTS</a></li>
-				<li><a href="<%=basePath%>activities.html" target="_self">ACTIVITY</a></li>
+				<%--<li><a href="<%=basePath%>events.html" target="_self">EVENTS</a></li>--%>
+				<%--<li><a href="<%=basePath%>activities.html" target="_self">ACTIVITY</a></li>--%>
 				<li><a href="<%=basePath%>openpositions.html" target="_self">OPENTION POSITION</a></li>
 				<li><a href="#" target="_self">CONTACT</a></li>
 			</ul>
@@ -113,10 +113,10 @@ pageEncoding="UTF-8"%>
 		&nbsp;-&nbsp;
 		<a href="<%=basePath%>publications.html">Publication</a>
 		&nbsp;-&nbsp;
-		<a href="<%=basePath%>events.html">Events</a>
-		&nbsp;-&nbsp;
-		<a href="<%=basePath%>activities.html">Activities</a>
-		&nbsp;-&nbsp;
+		<%--<a href="<%=basePath%>events.html">Events</a>--%>
+		<%--&nbsp;-&nbsp;--%>
+		<%--<a href="<%=basePath%>activities.html">Activities</a>--%>
+		<%--&nbsp;-&nbsp;--%>
 		<a href="<%=basePath%>openpositions.html">Open Positions</a>
 		&nbsp;-&nbsp;
 		<a href="#">Contact Us</a>

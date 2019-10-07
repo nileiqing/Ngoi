@@ -12,6 +12,10 @@
 	            <td id="J_title1">内容标题:</td>
 	            <td id="J_title2"><input class="easyui-textbox" type="text" id="title" name="title" data-options="required:true" style="width: 280px;"></input></td>
 	        </tr>
+			<tr >
+				<td id="J_index1">序号:</td>
+				<td id="J_index2"><input class="easyui-textbox" type="text" id="cIndex"  name="cIndex" data-options="required:true" style="width: 280px;"/></td>
+			</tr>
 <!-- 	         <tr >
    <td id="J_specialy">学院特色:</td>
    <td id="J_titleDesc1y">
@@ -129,7 +133,7 @@ var contentEditPage = {
 
 					var reg=new RegExp(/^[0-9]+$/);
 					
-					if(reg.test(document.getElementById("title").value)==false){
+					if(reg.test(document.getElementById("cIndex").value)==false){
 						$.messager.alert('提示',"序号应该为数字！");
 						return ;
 					}

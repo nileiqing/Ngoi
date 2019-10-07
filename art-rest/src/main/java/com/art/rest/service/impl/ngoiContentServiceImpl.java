@@ -5,18 +5,12 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import com.art.pojo.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor;
 
 import com.art.mapper.TContentCategoryMapper;
 import com.art.mapper.TContentMapper;
-import com.art.pojo.TContent;
-import com.art.pojo.TContentCategory;
-import com.art.pojo.TContentCategoryExample;
-import com.art.pojo.TContentExample;
-import com.art.pojo.TContentExample.Criteria;
 import com.art.rest.serivce.ngoiContentService;
 
 @Service
@@ -35,7 +29,7 @@ public class ngoiContentServiceImpl implements ngoiContentService{
 	 */
 	
 	@Override
-	public List<TContent> getContentListByCategoryId(long CategoryId,int ordertype) {
+	public List<TContentWithBLOBs> getContentListByCategoryId(long CategoryId,int ordertype) {
 		// TODO Auto-generated method stub
 		TContentExample example=new TContentExample();
 		TContentExample.Criteria criteria=example.createCriteria();
@@ -43,8 +37,10 @@ public class ngoiContentServiceImpl implements ngoiContentService{
 		criteria.andCategoryIdEqualTo(CategoryId);
 		if(ordertype==1) {
 			example.setOrderByClause("created desc");
+		}else if(ordertype==2){
+			example.setOrderByClause("c_index");
 		}
-		List<TContent>list=tContentMapper.selectByExampleWithBLOBs(example);
+		List<TContentWithBLOBs>list=tContentMapper.selectByExampleWithBLOBs(example);
 		
 		if (list!=null&&list.size()>0) {
 			
@@ -56,12 +52,12 @@ public class ngoiContentServiceImpl implements ngoiContentService{
 	 * 根据Id获取内容
 	 */
 	@Override
-	public TContent getContentById(long contentId) {
+	public TContentWithBLOBs getContentById(long contentId) {
 		// TODO Auto-generated method stub
 		TContentExample example=new TContentExample();
 		TContentExample.Criteria criteria=example.createCriteria();
 		criteria.andIdEqualTo(contentId);
-		List<TContent> list=tContentMapper.selectByExampleWithBLOBs(example);
+		List<TContentWithBLOBs> list=tContentMapper.selectByExampleWithBLOBs(example);
 		if (list!=null&&list.size()>0) {
 			
 			return list.get(0);
@@ -75,7 +71,7 @@ public class ngoiContentServiceImpl implements ngoiContentService{
 	 */
 	List<Long> CategoryIdlist=new ArrayList<Long>();
 	@Override
-	public List<TContent> getContentAllListByCategoryId(long CategoryId, int odertype) {
+	public List<TContentWithBLOBs> getContentAllListByCategoryId(long CategoryId, int odertype) {
 		
 		// TODO Auto-generated method stub
 		TContentCategoryExample tContentCategoryExample=new TContentCategoryExample();
@@ -86,15 +82,17 @@ public class ngoiContentServiceImpl implements ngoiContentService{
 			
 			CateGoryDFS(tContentCategories);
 		}
-		List<TContent> contentlist=new ArrayList<TContent>();
+		List<TContentWithBLOBs> contentlist=new ArrayList<TContentWithBLOBs>();
 		for(int i=0;i<CategoryIdlist.size();i++) {
 			TContentExample example=new TContentExample();
 			TContentExample.Criteria criteria=example.createCriteria();
 			criteria.andCategoryIdEqualTo(CategoryIdlist.get(i));
 			if(odertype==1) {
 				example.setOrderByClause("created desc");
+			}else if(odertype==2){
+				example.setOrderByClause("c_index");
 			}
-			List<TContent> list=tContentMapper.selectByExampleWithBLOBs(example);
+			List<TContentWithBLOBs> list=tContentMapper.selectByExampleWithBLOBs(example);
 			for (int j = 0; j < list.size(); j++) {
 					contentlist.add(list.get(j));
 				}
@@ -117,48 +115,5 @@ public class ngoiContentServiceImpl implements ngoiContentService{
 			}
 		}
 	}
-	/***
-	 * 根据title中存储的数字 大小进行排序 来获取内容列表
-	 * @param CategoryId  分类id
-	 * @return
-	 */
-	@Override
-	public List<TContent> getPublicationContentListByOrder(long CategoryId, int odertype) {
-		// TODO Auto-generated method stub
-		// TODO Auto-generated method stub
-				TContentCategoryExample tContentCategoryExample=new TContentCategoryExample();
-				TContentCategoryExample.Criteria tContentCategorycriteria=tContentCategoryExample.createCriteria();
-				tContentCategorycriteria.andParentIdEqualTo(CategoryId);
-				List<TContentCategory> tContentCategories=tContentCategoryMapper.selectByExample(tContentCategoryExample);
-				if (tContentCategories!=null&&tContentCategories.size()>0) {
-					
-					CateGoryDFS(tContentCategories);
-				}
-				List<TContent> contentlist=new ArrayList<TContent>();
-				for(int i=0;i<CategoryIdlist.size();i++) {
-					TContentExample example=new TContentExample();
-					TContentExample.Criteria criteria=example.createCriteria();
-					criteria.andCategoryIdEqualTo(CategoryIdlist.get(i));
-					if(odertype==1) {
-						example.setOrderByClause("created desc");
-					}
-					List<TContent> list=tContentMapper.selectByExampleWithBLOBs(example);
-					for (int j = 0; j < list.size(); j++) {
-							contentlist.add(list.get(j));
-						}
 
-					
-				}
-				CategoryIdlist.clear();
-				Collections.sort(contentlist,new Comparator<TContent>() {
-
-					@Override
-					public int compare(TContent o1, TContent o2) {
-						// TODO Auto-generated method stub
-						
-						return  Integer.parseInt(o1.getTitle())-Integer.parseInt(o2.getTitle());
-					}
-				});
-				return contentlist;
-	}
 }

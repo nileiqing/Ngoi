@@ -39,15 +39,15 @@ $(function (){
 	        $(".labins ul").html(researchtho);
 	});
 //获取赞助商
-	$.getJSON(allurl + "getlist.html?categoryId="+sponsorscid, 
-			function(data) {
-	        var sponsors = "<strong>Sponsors:</strong>";
-        	$.each(data,function(i,item){
-        		sponsors+="<hr class=mainrighthr>";
-	            sponsors+="<a href="+item.url+"><img src="+item.pic+"/></a>";
-	        });
-	        $(".sponsors").html(sponsors);
-	});
+	$.getJSON(allurl + "getlist.html?categoryId="+sponsorscid,
+		function(data) {
+			var sponsors = "<strong>Sponsors:</strong>";
+			$.each(data,function(i,item){
+				sponsors+="<hr class=mainrighthr>";
+				sponsors+="<a href="+item.url+"><img src="+item.pic+"></a>";
+			});
+			$(".sponsors").html(sponsors);
+		});
 //获取链接
 	$.getJSON(allurl + "getlist.html?categoryId="+linkscid, 
 				function(data) {

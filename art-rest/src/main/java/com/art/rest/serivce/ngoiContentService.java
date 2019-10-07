@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.art.pojo.TContent;
+import com.art.pojo.TContentWithBLOBs;
 
 
 public interface ngoiContentService {
@@ -12,7 +13,7 @@ public interface ngoiContentService {
 	 * @param CategoryId  分类id odertype 排序类型
 	 * @return
 	 */
-	List<TContent> getContentListByCategoryId(long CategoryId ,int odertype);
+	List<TContentWithBLOBs> getContentListByCategoryId(long CategoryId ,int odertype);
 	/***
 	 * 根据id获取对应内容
 	 * @param contentId  分类id
@@ -24,12 +25,6 @@ public interface ngoiContentService {
 	 * @param CategoryId  分类id
 	 * @return
 	 */
-	List<TContent> getContentAllListByCategoryId(long CategoryId ,int odertype);
-	/***
-	 * 根据title中存储的数字 大小进行排序 来获取内容列表
-	 * @param CategoryId  分类id
-	 * @return
-	 */
-	List<TContent> getPublicationContentListByOrder(long CategoryId ,int odertype);
+	List<TContentWithBLOBs> getContentAllListByCategoryId(long CategoryId ,int odertype);
 	
 }

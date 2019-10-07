@@ -5,8 +5,9 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
+import com.art.pojo.TContentWithBLOBs;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cglib.transform.impl.AddDelegateTransformer;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import com.art.common.pojo.ArtResult;
@@ -29,7 +30,7 @@ public class ContentServiceImpl implements ContentService{
      * @param content
      * @return
      */
-	public ArtResult insertContent(TContent content) {
+	public ArtResult insertContent(TContentWithBLOBs content) {
 		// TODO Auto-generated method stub
 		content.setCreated(new Date());
 		content.setUpdated(new Date());
@@ -37,10 +38,9 @@ public class ContentServiceImpl implements ContentService{
 /*		content.setContent(AddEscapecharacter(content.getContent()));
 		content.setTitle(AddEscapecharacter(content.getTitle()));
 		content.setTitleDesc(AddEscapecharacter(content.getTitleDesc()));*/
-		
 		TContentMapper.insert(content);
 		//若更新的是publication板块的内容，则对title字段重新进行排序和更新
-		RefershPublicationOrder(content.getCategoryId());
+		RefershOrder(content.getCategoryId());
 		return ArtResult.ok();
 	}
 	/**
@@ -56,14 +56,15 @@ public class ContentServiceImpl implements ContentService{
 		TContentExample tContentExample=new TContentExample();
 		Criteria  criteria=tContentExample.createCriteria();
 		criteria.andCategoryIdEqualTo(categoryId);
-		//若是publication模块则按照title 序号升序排序
-		/*
-		 * if(categoryId>=29&&categoryId<=33) {
-		 * tContentExample.setOrderByClause("title"); }
-		 */
+		//若是publication模块则按照c_index序号升序排序
+
+		 if((categoryId>=29&&categoryId<=33)||categoryId==5) {
+		  tContentExample.setOrderByClause("c_index");
+		 }
+
 		PageHelper.startPage(page, rows);
-		List<TContent> contentList=TContentMapper.selectByExampleWithBLOBs(tContentExample);
-		if(categoryId>=29&&categoryId<=33) {
+		List<TContentWithBLOBs> contentList=TContentMapper.selectByExampleWithBLOBs(tContentExample);
+		/*if(categoryId>=29&&categoryId<=33) {
 			Collections.sort(contentList, new Comparator<TContent>() {
 				@Override
 				public int compare(TContent o1, TContent o2) {
@@ -71,12 +72,12 @@ public class ContentServiceImpl implements ContentService{
 					return Integer.parseInt(o1.getTitle())-Integer.parseInt(o2.getTitle());
 				}
 			});
-		}
+		}*/
 		//创建一个返回值对象
 		EUDataGridResult result=new EUDataGridResult();
 		result.setRows(contentList);
 		//取记录总条数
-		PageInfo<TContent> pageInfo=new PageInfo<>(contentList);
+		PageInfo<TContentWithBLOBs> pageInfo=new PageInfo<>(contentList);
 		result.setTotal(pageInfo.getTotal());
 		return result;
 	}
@@ -87,29 +88,31 @@ public class ContentServiceImpl implements ContentService{
      * @return
      */
 	@Override
-	public ArtResult updateContent(TContent content) {
+	public ArtResult updateContent(TContentWithBLOBs content) {
 		// TODO Auto-generated method stub
 		//对英文的'和"前加上转义符        不需要加
-		TContent content2=TContentMapper.selectByPrimaryKey(content.getId());
+		TContentWithBLOBs content2=TContentMapper.selectByPrimaryKey(content.getId());
 		content.setCreated(content2.getCreated());
 		content.setUpdated(new Date());
-		TContentMapper.updateByPrimaryKeyWithBLOBs(content);
-		//若更新的是publication板块的内容，则对title字段重新进行排序和更新
-		RefershPublicationOrder(content.getCategoryId());
+		TContentMapper.updateByPrimaryKeyWithBLOBs(content2);
+		//若更新的是publication和Research板块的内容，则对title字段重新进行排序和更新
+		RefershOrder(content.getCategoryId());
 		return ArtResult.ok();
 	}
 	/**
      * 尼雷清
      * 根据id删除对应的内容
-     * @param content
+     * @param ids
      * @return
      */
 	@Override
 	public ArtResult deleteConent(List<Long> ids) {
 		// TODO Auto-generated method stub
+		Long categoryID = TContentMapper.selectByPrimaryKey(ids.get(0)).getCategoryId();
 		for(int i=0;i<ids.size();i++){
 			TContentMapper.deleteByPrimaryKey(ids.get(i));
 		}
+		RefershOrder(categoryID);
 		return ArtResult.ok();
 	}
 	/**
@@ -118,21 +121,16 @@ public class ContentServiceImpl implements ContentService{
      * @param categoryId
      * @return
      */
-	public void RefershPublicationOrder(long categoryId){
-		if(categoryId>=29&&categoryId<=33) {
+	public void RefershOrder(long categoryId){
+		if((categoryId>=29&&categoryId<=33)||categoryId==5) {
 			TContentExample tContentExample=new TContentExample();
 			Criteria  criteria=tContentExample.createCriteria();
 			criteria.andCategoryIdEqualTo(categoryId);
-			List<TContent> contentList=TContentMapper.selectByExampleWithBLOBs(tContentExample);
-			Collections.sort(contentList, new Comparator<TContent>() {
-					@Override
-					public int compare(TContent o1, TContent o2) {
-						// TODO Auto-generated method stub
-						return Integer.parseInt(o1.getTitle())-Integer.parseInt(o2.getTitle());
-					}
-			});
+			tContentExample.setOrderByClause("c_index");
+			List<TContentWithBLOBs> contentList=TContentMapper.selectByExampleWithBLOBs(tContentExample);
+			//对该categoryId下的所有内容的序号进行重新排列
 			for(int i = 0 ; i<contentList.size();i++) {
-				contentList.get(i).setTitle(String.valueOf(i+1));
+				contentList.get(i).setcIndex(i+1);
 				TContentMapper.updateByPrimaryKeyWithBLOBs(contentList.get(i));
 			}
 		}
@@ -141,7 +139,7 @@ public class ContentServiceImpl implements ContentService{
 	/**
      * 尼雷清
      * 根据对应的英文' 和 英文 " 加上转义符
-     * @param content
+     * @param str
      * @return
      */
 	String AddEscapecharacter(String str){

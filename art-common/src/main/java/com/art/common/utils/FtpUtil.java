@@ -68,7 +68,8 @@ public class FtpUtil {
 				}
 			}
 			//设置上传文件的类型为二进制类型
-			//ftp.enterLocalPassiveMode();
+
+			ftp.enterLocalPassiveMode();
 			ftp.setFileType(FTP.BINARY_FILE_TYPE);
 			//上传文件
 			if (!ftp.storeFile(filename, input)) {

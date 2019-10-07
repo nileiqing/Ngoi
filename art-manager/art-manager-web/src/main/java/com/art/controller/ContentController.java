@@ -2,6 +2,7 @@ package com.art.controller;
 
 import java.util.List;
 
+import com.art.pojo.TContentWithBLOBs;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,7 +28,7 @@ public class ContentController {
      */
 	@RequestMapping("/save")
 	@ResponseBody
-	public ArtResult addContent(TContent content)throws Exception{
+	public ArtResult addContent(TContentWithBLOBs content)throws Exception{
 		ArtResult result=contentService.insertContent(content);
 		return result;
 	}
@@ -51,14 +52,14 @@ public class ContentController {
      */
 	@RequestMapping(value="/edit",method=RequestMethod.POST)
 	@ResponseBody
-	public ArtResult updateContentList(TContent content)throws Exception{
+	public ArtResult updateContentList(TContentWithBLOBs content)throws Exception{
 		ArtResult result=contentService.updateContent(content);
 		return result;
 	}
 	/**
      * 尼雷清
      * 删除对应的内容  
-     * @param content
+     * @param ids
      * @return
      */
 	@RequestMapping(value="/delete",method=RequestMethod.POST)

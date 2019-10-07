@@ -8,7 +8,7 @@ var resthcid=12;//研究课题的对应categoryid
 var sponsorscid=16;//赞助商的对应categoryid
 var linkscid=17;//链接的对应categoryid
 var innewcid=18;//首页新闻对应的categoryid
-var ordertype=1;//排序方式
+var ordertype=2;//排序方式 按照c_index排列
 var teamcid=3;//team的分类id
 	var facultycurid=19;//教工id
 	var pdfcurid=20;//在读博士后id
@@ -61,7 +61,7 @@ $(function (){
 		        $(".ulinks img").css({"margin-top":"15px","margin-bottom":"15px"});
 	});
 //获取出版物信息
-	$.getJSON(allurl + "getpublicationlist.html?categoryId="+publicationcid+"&ordertype="+ordertype, 
+	$.getJSON(allurl + "getalllist.html?categoryId="+publicationcid+"&ordertype="+ordertype,
 				function(data) {
 					var finalHtml="";
 					var booklistr="";//书

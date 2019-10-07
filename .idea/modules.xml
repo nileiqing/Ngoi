@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/Ngoi.iml" filepath="$PROJECT_DIR$/.idea/Ngoi.iml" />
+      <module fileurl="file://$PROJECT_DIR$/art-common/art-common.iml" filepath="$PROJECT_DIR$/art-common/art-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/art-manager/art-manager.iml" filepath="$PROJECT_DIR$/art-manager/art-manager.iml" />
+      <module fileurl="file://$PROJECT_DIR$/art-manager/art-manager-mapper/art-manager-mapper.iml" filepath="$PROJECT_DIR$/art-manager/art-manager-mapper/art-manager-mapper.iml" />
+      <module fileurl="file://$PROJECT_DIR$/art-manager/art-manager-pojo/art-manager-pojo.iml" filepath="$PROJECT_DIR$/art-manager/art-manager-pojo/art-manager-pojo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/art-manager/art-manager-service/art-manager-service.iml" filepath="$PROJECT_DIR$/art-manager/art-manager-service/art-manager-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/art-manager/art-manager-web/art-manager-web.iml" filepath="$PROJECT_DIR$/art-manager/art-manager-web/art-manager-web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/art-parent/art-parent.iml" filepath="$PROJECT_DIR$/art-parent/art-parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/art-portal/art-portal.iml" filepath="$PROJECT_DIR$/art-portal/art-portal.iml" />
+      <module fileurl="file://$PROJECT_DIR$/art-rest/art-rest.iml" filepath="$PROJECT_DIR$/art-rest/art-rest.iml" />
+    </modules>
+  </component>
+</project>

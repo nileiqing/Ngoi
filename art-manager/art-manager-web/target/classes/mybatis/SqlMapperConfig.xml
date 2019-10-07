@@ -3,7 +3,10 @@
 		PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		"http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-
+	<!--<settings>
+		&lt;!&ndash; 打印查询语句 &ndash;&gt;
+		<setting name="logImpl" value="STDOUT_LOGGING" /> &lt;!&ndash;最好是放在最上面即紧跟configuration节点,注意顺序&ndash;&gt;
+	</settings>-->
 	<!-- 配置mybatis的分页插件 -->
 	<plugins>
 		<plugin interceptor="com.github.pagehelper.PageHelper">
