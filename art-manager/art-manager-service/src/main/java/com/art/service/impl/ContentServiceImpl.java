@@ -94,7 +94,7 @@ public class ContentServiceImpl implements ContentService{
 		TContentWithBLOBs content2=TContentMapper.selectByPrimaryKey(content.getId());
 		content.setCreated(content2.getCreated());
 		content.setUpdated(new Date());
-		TContentMapper.updateByPrimaryKeyWithBLOBs(content2);
+		TContentMapper.updateByPrimaryKeyWithBLOBs(content);
 		//若更新的是publication和Research板块的内容，则对title字段重新进行排序和更新
 		RefershOrder(content.getCategoryId());
 		return ArtResult.ok();

@@ -12,6 +12,8 @@ import com.art.pojo.TUser;
 import com.art.pojo.TUserExample;
 import com.art.pojo.TUserExample.Criteria;
 import com.art.service.UserService;
+import org.springframework.util.DigestUtils;
+
 @Service
 public class UserServiceImpl implements UserService {
 	@Autowired
@@ -55,6 +57,7 @@ public class UserServiceImpl implements UserService {
 			return ArtResult.build(300, "");//代表已存在用户，不允许添加
 		}
 		else{
+			user.setPassword(DigestUtils.md5DigestAsHex(user.getPassword().getBytes()));
 			user.setCreated(now);
 		    user.setUpdated(now);
 		    if(userMapper.insertSelective(user)==1){
@@ -78,6 +81,7 @@ public class UserServiceImpl implements UserService {
 			return ArtResult.build(300, "");
 		}
 		else{
+			user.setPassword(DigestUtils.md5DigestAsHex(user.getPassword().getBytes()));
 			user.setUpdated(now);
 			if(userMapper.updateByPrimaryKeySelective(user)==1){
 				return ArtResult.ok(200);
