@@ -10,7 +10,7 @@ public class EUTreeNode {
 	private long id;
 	private String text;
 	private String state;
-	
+	private String url;
 	public long getId() {
 		return id;
 	}
@@ -23,6 +23,15 @@ public class EUTreeNode {
 	public void setText(String text) {
 		this.text = text;
 	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
 	public String getState() {
 		return state;
 	}

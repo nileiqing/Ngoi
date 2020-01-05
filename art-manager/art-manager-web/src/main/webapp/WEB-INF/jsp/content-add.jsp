@@ -60,9 +60,15 @@
 	        <tr>
 	            <td id="J_content1">内容:</td>
 	            <td id="J_content2">
-	                <textarea style="width:1000px;height:600px;visibility:hidden;" id="content" name="content"></textarea>
+	                <textarea style="width:1000px;height:400px;visibility:hidden;" id="content" name="content"></textarea>
 	            </td>
 	        </tr>
+			<tr>
+				<td id="J_content_zh1">内容:</td>
+				<td id="J_content_zh2">
+					<textarea style="width:1000px;height:400px;visibility:hidden;" id="contentZhCn" name="contentZhCn"></textarea>
+				</td>
+			</tr>
 	    </table>
 	</form>
 	<div style="padding:5px">
@@ -72,11 +78,15 @@
 </div>
 <script type="text/javascript">
 	var contentAddEditor ;
+	var contentZhCnAddEditor;
 	$(function(){
+		$("#contentAddForm [name=categoryId]").val($("#contentCategoryTree").tree("getSelected").id);
 		contentAddEditor = TT.createEditor("#contentAddForm [name=content]");
+		contentZhCnAddEditor = TT.createEditor("#contentAddForm [name=contentZhCn]");
 		TT.initOnePicUpload();
 		TT.initOneFileUpload();
-		$("#contentAddForm [name=categoryId]").val($("#contentCategoryTree").tree("getSelected").id);
+
+
 	});
 	
 	var contentAddPage  = {
@@ -141,6 +151,7 @@
 				}
 	
 				contentAddEditor.sync();
+				contentZhCnAddEditor.sync();
 				$.post("/content/save",$("#contentAddForm").serialize(), function(data){
 					if(data.status == 200){
     					$("#contentList").datagrid("reload");
@@ -152,6 +163,7 @@
 			clearForm : function(){
 				$('#contentAddForm').form('reset');
 				contentAddEditor.html('');
+				contentZhCnAddEditor.html('');
 			}
 	};
 </script>

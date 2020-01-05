@@ -19,14 +19,16 @@
 </head>
 <body class="easyui-layout">
     <div data-options="region:'west',title:'菜单',split:true" style="width:180px;">
-    	<ul id="menu" class="easyui-tree" style="margin-top: 10px;margin-left: 5px;">
-         	<li>
-         		<span>网站内容管理</span>
-         		<ul>
-	         		<!-- <li data-options="attributes:{'url':'content-category'}">内容分类管理</li> -->
-	         		<li data-options="attributes:{'url':'content'}">内容管理</li>
-	         	</ul>
-         	</li>
+		<ul id="mainContentCategoryTree" class="easyui-tree" style="margin-left: 5px;" data-options="url:'/content/category/list',animate: true,method : 'GET'">
+		</ul>
+    	<ul id="menu" class="easyui-tree" style="margin-left: 5px;">
+         	<%--<li>--%>
+         		<%--<span>网站内容管理</span>--%>
+         		<%--<ul>--%>
+	         		<%--<!-- <li data-options="attributes:{'url':'content-category'}">内容分类管理</li> -->--%>
+	         		<%--<li data-options="attributes:{'url':'content'}">内容管理</li>--%>
+	         	<%--</ul>--%>
+         	<%--</li>--%>
          	<li>
          		<span>人员管理</span>
          		<ul>
@@ -45,6 +47,25 @@
     </div>
 <script type="text/javascript">
 $(function(){
+	$('#mainContentCategoryTree').tree({
+		onClick: function(node){
+			var n_url = node.url+"?categoryId="+node.id;
+			if($('#mainContentCategoryTree').tree("isLeaf",node.target)){
+				var tabs = $("#tabs");
+				var tab = tabs.tabs("getTab",node.text);
+				if(tab){
+					tabs.tabs("select",node.text);
+				}else{
+					tabs.tabs('add',{
+						title:node.text,
+						href: n_url,
+						closable:true,
+						bodyCls:"content"
+					});
+				}
+			}
+		}
+	});
 	$('#menu').tree({
 		onClick: function(node){
 			if($('#menu').tree("isLeaf",node.target)){
@@ -54,16 +75,17 @@ $(function(){
 					tabs.tabs("select",node.text);
 				}else{
 					tabs.tabs('add',{
-					    title:node.text,
-					    href: node.attributes.url,
-					    closable:true,
-					    bodyCls:"content"
+						title:node.text,
+						href: node.attributes.url,
+						closable:true,
+						bodyCls:"content"
 					});
 				}
 			}
 		}
 	});
 });
+
 </script>
 </body>
 </html>

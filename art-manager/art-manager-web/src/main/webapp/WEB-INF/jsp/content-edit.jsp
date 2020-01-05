@@ -62,7 +62,7 @@
 	        <tr>
 	            <td id="J_content1">内容:</td>
 	            <td id="J_content2">
-	                <textarea style="width:1000px;height:600px;visibility:hidden;" id="content" name="content"></textarea>
+	                <textarea style="width:1000px;height:400px;visibility:hidden;" id="content" name="content"></textarea>
 	            </td>
 	        </tr>
 	    </table>
@@ -76,6 +76,8 @@
 var contentEditEditor ;
 $(function(){
 	contentEditEditor = TT.createEditor("#contentEditForm [name=content]");
+	//如果是新闻页面则将内容的大小改为600
+	var categoryId= document.getElementById("categoryId").value;
 	TT.initOnePicUpload();
 	TT.initOneFileUpload();
 	$("#contentEditForm [name=pic]").eq(1).remove();

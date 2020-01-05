@@ -42,6 +42,7 @@ public class ContentCategoryServiceImpl implements ContentCategoryService {
 			node.setId(tContentCategory.getId());
 			node.setText(tContentCategory.getName());
 			node.setState(tContentCategory.getIsParent()?"closed":"open");
+			node.setUrl(tContentCategory.getUrl());
 			resultList.add(node);
 		}
 		return resultList;

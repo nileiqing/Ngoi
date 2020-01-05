@@ -29,8 +29,18 @@
 //去的显示页面的样式，并进行渲染
 var getpagemodel = function(categoryId){
 	var hiddentype;
-	if(categoryId=="11"||categoryId=="12"||(categoryId>=19&&categoryId<=28)||categoryId=="34"||categoryId=="35"||categoryId=="8"||categoryId=="9"){//此处是只有一个内容的情况（其中的内容标题是用来对此词条做描述用的） Lab introduction 实验室介绍+Research 也做成员介绍处的显示 34、35为Event模块 8为Activities模块 9为Open Position模块
-			
+	if(categoryId=="11"||categoryId=="12"||(categoryId>=19&&categoryId<=28)||categoryId=="34"||categoryId=="35"||categoryId=="8"||categoryId=="9"){
+	//此处是只有一个内容的情况（其中的内容标题是用来对此词条做描述用的） Lab introduction 实验室介绍+Research 也做成员介绍处的显示 34、35为Event模块 8为Activities模块 9为Open Position模块
+		/*
+		8:Activities
+		9:Open position
+		11:实验室简介
+		12:研究方向
+		19-28:团队成员
+		34:Events content
+		35:轮播图
+		*/
+
 		hiddentype=0;//标题 内容
 				
 	}else if(categoryId=="18"){//news的图片日期简介
@@ -210,7 +220,7 @@ $(function(){
 				datagrid.datagrid('hideColumn', 'pic2');//隐藏对第二个图片
 				datagrid.datagrid('showColumn', 'title');//显示对应的标题
 				datagrid.datagrid('hideColumn', 'subTitle');//隐藏副标题
-				
+
 			}else if(categoryId=="18"){//title subtitle（存放日期） pic content 用来显示首页的新闻信息
 				var option2=datagrid.datagrid('getColumnOption', 'subTitle');//副标题 存放 日期
 				var option3=datagrid.datagrid('getColumnOption', 'pic');
@@ -223,7 +233,7 @@ $(function(){
 				datagrid.datagrid('hideColumn', 'pic2');//隐藏对第二个图片
 				datagrid.datagrid('showColumn', 'title');//显示对应的标题
 				datagrid.datagrid('showColumn', 'subTitle');//显示副标题
-				
+
 			}else if(categoryId=="14"||categoryId=="15"||categoryId=="16"||categoryId=="17"){//只有一个图片（但是编辑中有URL）
 				datagrid.datagrid();
 				datagrid.datagrid('hideColumn', 'cIndex');//隐藏序号
@@ -232,7 +242,7 @@ $(function(){
 				datagrid.datagrid('hideColumn', 'pic2');//隐藏对第二个图片
 				datagrid.datagrid('hideColumn', 'title');//显示对应的标题
 				datagrid.datagrid('hideColumn', 'subTitle');//显示副标题
-				
+
 			}else if(categoryId>=19&&categoryId<=28){
 			//此处为成员介绍，因为有模板所以只显示标题即可
 				datagrid.datagrid('hideColumn', 'cIndex');//隐藏序号
@@ -263,9 +273,9 @@ $(function(){
 				datagrid.datagrid('showColumn', 'title');//显示对应的标题
 				datagrid.datagrid('hideColumn', 'subTitle');//隐藏副标题
 			}
-			
-				
-			
+
+
+
 		}
 	});
 });
