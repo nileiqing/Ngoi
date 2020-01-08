@@ -12,63 +12,70 @@ import com.art.portal.service.ngoiContentService;
 
 @Controller
 public class ngoiContentController {
-	
+
 @Autowired
 private ngoiContentService ngoiContentService;
 //进行Contact视图的跳转
 @RequestMapping(value="/contact")
 public ModelAndView showcontact() {
 	ModelAndView modelAndView=new ModelAndView();
-	modelAndView.setViewName("contact");
+	modelAndView.setViewName("en/contact");
 	return modelAndView;
 }
 //进行Activities视图的跳转
 @RequestMapping(value="/openpositions")
 public ModelAndView showopenpositions() {
 	ModelAndView modelAndView=new ModelAndView();
-	modelAndView.setViewName("openpositions");
+	modelAndView.setViewName("en/openpositions");
 	return modelAndView;
 }
 //进行Activities视图的跳转
 @RequestMapping(value="/activities")
 public ModelAndView showactivities() {
 	ModelAndView modelAndView=new ModelAndView();
-	modelAndView.setViewName("activities");
+	modelAndView.setViewName("en/activities");
 	return modelAndView;
 }
 //进行Events视图的跳转
 @RequestMapping(value="/events")
 public ModelAndView showevents() {
 	ModelAndView modelAndView=new ModelAndView();
-	modelAndView.setViewName("events");
+	modelAndView.setViewName("en/events");
 	return modelAndView;
 }
 //进行出版物视图的跳转
 @RequestMapping(value="/publications")
 public ModelAndView showpublications() {
 	ModelAndView modelAndView=new ModelAndView();
-	modelAndView.setViewName("publications");
+	modelAndView.setViewName("en/publications");
 	return modelAndView;
 }
 //进行研究项目视图的跳转
 @RequestMapping(value="/research")
 public ModelAndView showresearch() {
 	ModelAndView modelAndView=new ModelAndView();
-	modelAndView.setViewName("research");
+	modelAndView.setViewName("en/research");
 	return modelAndView;
 }
 //进行团队视图的跳转
 @RequestMapping(value="/team")
 public ModelAndView showteam() {
 	ModelAndView modelAndView=new ModelAndView();
-	modelAndView.setViewName("team");
+	modelAndView.setViewName("en/team");
 	return modelAndView;
 }
+//进行主页视图的跳转
+@RequestMapping(value="/index")
+public ModelAndView showindex() {
+		ModelAndView modelAndView=new ModelAndView();
+		modelAndView.setViewName("en/index");
+		return modelAndView;
+	}
 //进行首页详细新闻视图的跳转
 @RequestMapping(value="/home/news/{contentid}")
 public ModelAndView showhomenews(@PathVariable Integer contentid) {
 	ModelAndView modelAndView=new ModelAndView();
-	modelAndView.setViewName("homenews");
+	modelAndView.setViewName("en/homenews");
 	modelAndView.addObject("contentid", contentid);
 	return modelAndView;
 }
@@ -76,7 +83,7 @@ public ModelAndView showhomenews(@PathVariable Integer contentid) {
 @RequestMapping(value="/home/newslist")
 public ModelAndView showhomenewslist() {
 	ModelAndView modelAndView=new ModelAndView();
-	modelAndView.setViewName("homenewslist");
+	modelAndView.setViewName("en/homenewslist");
 	return modelAndView;
 }
 //根据分类id按照顺序获取所有叶子节点的内容数据
